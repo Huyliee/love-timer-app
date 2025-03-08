@@ -244,6 +244,12 @@ h3 {
   animation: heartBeat 1.5s infinite;
 }
 
+.heart-icon img {
+  height: 50px; /* hoặc kích thước phù hợp */
+  width: auto;
+  animation: heartBeat 1.5s infinite;
+}
+
 @keyframes heartBeat {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }

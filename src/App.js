@@ -200,8 +200,9 @@ function App() {
             <div className="photo-caption">Ngọc Huy</div>
           </div>
           
-          <div className="heart-icon">❤️</div>
-          
+          <div className="heart-icon">
+          <img src="https://png.pngtree.com/png-clipart/20220110/original/pngtree-valentien-red-heart-game-png-image_7069243.png" alt="Heart" />
+          </div>          
           <div className="photo-item">
             <div className="photo-frame">
               <img src={FIXED_IMAGE2_URL} alt="Người yêu 2" />
