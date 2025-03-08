@@ -10,7 +10,7 @@ import em from './assets/images/em.jpg'
 
 function App() {
   // Dữ liệu tĩnh - cố định ngày bắt đầu yêu
-  const FIXED_START_DATE = '2023-06-13'; // Định dạng YYYY-MM-DD
+  const FIXED_START_DATE = '2016-06-13'; // Định dạng YYYY-MM-DD
   
   // Dữ liệu tĩnh - URL hình ảnh cố định (thay bằng URL thực của bạn)
   const FIXED_IMAGE1_URL = anh; 
