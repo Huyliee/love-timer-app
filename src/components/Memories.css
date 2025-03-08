@@ -1,267 +1,36 @@
-/* File: src/components/Memories.css */
-.memories-container {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .add-button {
-    background-color: #ff6b95;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
+/* Thêm loading spinner */
+.loading {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: fit-content;
-  }
-  
-  .add-button:hover {
-    background-color: #ff3372;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(255, 107, 149, 0.2);
-  }
-  
-  .add-button i {
-    margin-right: 8px;
-  }
-  
-  .memory-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    animation: slideDown 0.4s ease;
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .memory-form h3 {
-    margin-bottom: 20px;
-    color: #ff6b95;
-    font-size: 1.5rem;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #555;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="date"],
-  .form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: #ff6b95;
-    outline: none;
-  }
-  
-  .form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  .file-input {
-    display: none;
-  }
-  
-  .file-label {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #f0f0f0;
-    color: #666;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  
-  .file-label:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .file-label i {
-    margin-right: 8px;
-  }
-  
-  .image-preview {
-    margin-top: 15px;
-    max-width: 300px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .image-preview img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .form-buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  .submit-button,
-  .cancel-button {
-    padding: 12px 25px;
-    border-radius: 30px;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-  }
-  
-  .submit-button {
-    background-color: #ff6b95;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #ff3372;
-  }
-  
-  .cancel-button {
-    background-color: #f0f0f0;
-    color: #666;
-  }
-  
-  .cancel-button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .submit-button i,
-  .cancel-button i {
-    margin-right: 8px;
-  }
-  
-  .memories-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-  }
-  
-  .memory-card {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
-    position: relative;
-  }
-  
-  .memory-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(255, 107, 149, 0.15);
-  }
-  
-  .memory-image {
-    height: 200px;
-    overflow: hidden;
-  }
-  
-  .memory-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-  }
-  
-  .memory-card:hover .memory-image img {
-    transform: scale(1.05);
-  }
-  
-  .memory-content {
-    padding: 20px;
-  }
-  
-  .memory-content h4 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  
-  .memory-date {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 12px;
-  }
-  
-  .memory-content p {
-    color: #666;
-    line-height: 1.6;
-  }
-  
-  .delete-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #ff3372;
-    font-size: 1rem;
-    opacity: 0;
-    transition: all 0.3s;
-  }
-  
-  .memory-card:hover .delete-button {
-    opacity: 1;
-  }
-  
-  .delete-button:hover {
-    background-color: rgba(255, 51, 114, 0.1);
-  }
-  
-  .no-memories {
-    grid-column: 1 / -1;
-    text-align: center;
     padding: 30px;
     color: #888;
-    font-style: italic;
   }
   
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #ff6b95;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Cải thiện responsive cho Memories */
   @media (max-width: 768px) {
+    .memories-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
     .memories-list {
       grid-template-columns: 1fr;
     }
@@ -272,5 +41,14 @@
     
     .form-buttons {
       flex-direction: column;
+      gap: 10px;
+    }
+    
+    .submit-button, .cancel-button {
+      width: 100%;
+    }
+    
+    .image-preview {
+      max-width: 100%;
     }
   }

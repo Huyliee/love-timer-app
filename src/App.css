@@ -31,6 +31,52 @@ body {
   opacity: 0.6;
 }
 
+.audio-init-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.audio-init-button {
+  background-color: #ff6b95;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 107, 149, 0.5);
+  animation: pulse 1.5s infinite;
+  transition: transform 0.3s;
+}
+
+.audio-init-button:hover {
+  transform: scale(1.05);
+}
+
+.audio-init-button i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
 .content {
   max-width: 900px;
   margin: 0 auto;
@@ -225,8 +271,8 @@ input[type="file"] {
 }
 
 .music-player {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 5px;
+  padding: 5px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -246,23 +292,22 @@ input[type="file"] {
 .songs-list ul {
   list-style: none;
   text-align: left;
+  padding-left: 0;
 }
 
 .songs-list li {
-  padding: 10px 15px;
+  padding: 12px 15px;
   margin-bottom: 8px;
   background-color: #f9f9f9;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   border-left: 3px solid transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .songs-list li:hover {
   background-color: #f0f0f0;
+  transform: translateY(-2px);
 }
 
 .songs-list li.active {
@@ -272,22 +317,22 @@ input[type="file"] {
 }
 
 .song-name {
-  flex-grow: 1;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.delete-song-btn {
-  background: none;
-  border: none;
-  color: #ff3372;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.3s;
-  padding: 5px;
+.song-name i {
+  color: #ff6b95;
 }
 
-.delete-song-btn:hover {
-  opacity: 1;
+.no-songs {
+  text-align: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #888;
+  font-style: italic;
 }
 
 .player-controls {
@@ -297,8 +342,12 @@ input[type="file"] {
 }
 
 .now-playing {
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-bottom: 15px;
+  font-size: 1rem;
   color: #666;
   font-weight: 600;
 }
@@ -308,6 +357,7 @@ input[type="file"] {
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .controls button {
@@ -317,12 +367,32 @@ input[type="file"] {
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 140px;
 }
 
 .controls button:hover {
   background-color: #ff3372;
+  transform: translateY(-2px);
+}
+
+.audio-controls {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 30px;
+}
+
+.audio-tip {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 10px;
+  font-style: italic;
 }
 
 .memories-section {
@@ -339,6 +409,7 @@ input[type="file"] {
   transition: all 0.3s;
   font-size: 1rem;
   margin-bottom: 20px;
+  min-height: 44px;
 }
 
 .toggle-memories:hover {
@@ -352,7 +423,34 @@ input[type="file"] {
   font-size: 0.9rem;
 }
 
-/* Responsive */
+/* Cải thiện date picker cho mobile */
+.date-picker {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.date-submit-btn {
+  padding: 10px 20px;
+  background-color: #ff6b95;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.date-submit-btn:hover {
+  background-color: #ff3372;
+}
+
+/* Cải thiện responsive cho điện thoại di động */
 @media (max-width: 768px) {
   .content {
     padding: 30px 15px;
@@ -375,24 +473,135 @@ input[type="file"] {
     width: 150px;
     height: 150px;
   }
+  
+  .audio-init-button {
+    width: 150px;
+    height: 150px;
+    font-size: 1rem;
+  }
+  
+  .audio-init-button i {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .content {
+    padding: 20px 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 20px 0 15px;
+  }
+  
   .time-boxes {
-    gap: 10px;
+    gap: 8px;
   }
   
   .time-box {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .time-value {
+    font-size: 1.4rem;
+  }
+  
+  .time-label {
+    font-size: 0.8rem;
+  }
+  
+  /* Giữ ảnh trên một hàng ngang */
+  .photos-container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  
+  .photo-frame {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .heart-icon {
+    font-size: 2rem;
+    margin: 0 10px;
+  }
+  
+  .upload-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .controls button {
+    width: 100%;
+  }
+  
+  .songs-list {
+    max-height: 150px;
+  }
+  
+  .songs-list li {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .audio-init-button {
+    width: 120px;
+    height: 120px;
+    font-size: 0.9rem;
+  }
+  
+  .audio-init-button i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* Cải thiện cho màn hình siêu nhỏ */
+@media (max-width: 320px) {
+  .time-box {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .time-value {
+    font-size: 1.2rem;
+  }
+  
+  .photo-frame {
     width: 80px;
     height: 80px;
   }
   
-  .time-value {
-    font-size: 1.5rem;
+  h1 {
+    font-size: 1.8rem;
   }
   
-  .photo-frame {
-    width: 120px;
-    height: 120px;
+  .photos-container {
+    gap: 5px;
+  }
+  
+  .heart-icon {
+    font-size: 1.5rem;
+    margin: 0 5px;
+  }
+
+  .photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

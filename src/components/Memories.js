@@ -12,11 +12,13 @@ const Memories = ({ db }) => {
     imageUrl: ''
   });
   const [isAdding, setIsAdding] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Lấy danh sách kỷ niệm từ Firestore
   useEffect(() => {
     const fetchMemories = async () => {
       try {
+        setIsLoading(true);
         const memoriesCollection = collection(db, 'memories');
         const snapshot = await getDocs(memoriesCollection);
         const memoriesList = snapshot.docs.map(doc => ({
@@ -29,6 +31,8 @@ const Memories = ({ db }) => {
         setMemories(memoriesList);
       } catch (error) {
         console.error("Lỗi khi lấy kỷ niệm:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -203,34 +207,41 @@ const Memories = ({ db }) => {
         </div>
       )}
       
-      <div className="memories-list">
-        {memories.length === 0 ? (
-          <p className="no-memories">Chưa có kỷ niệm nào. Hãy thêm kỷ niệm đầu tiên của bạn!</p>
-        ) : (
-          memories.map((memory, index) => (
-            <div className="memory-card" key={memory.id || index}>
-              {memory.imageUrl && (
-                <div className="memory-image">
-                  <img src={memory.imageUrl} alt={memory.title} />
-                </div>
-              )}
-              
-              <div className="memory-content">
-                <h4>{memory.title}</h4>
-                <div className="memory-date">{formatDate(memory.date)}</div>
-                <p>{memory.description}</p>
+      {isLoading ? (
+        <div className="loading">
+          <div className="loading-spinner"></div>
+          <p>Đang tải kỷ niệm...</p>
+        </div>
+      ) : (
+        <div className="memories-list">
+          {memories.length === 0 ? (
+            <p className="no-memories">Chưa có kỷ niệm nào. Hãy thêm kỷ niệm đầu tiên của bạn!</p>
+          ) : (
+            memories.map((memory, index) => (
+              <div className="memory-card" key={memory.id || index}>
+                {memory.imageUrl && (
+                  <div className="memory-image">
+                    <img src={memory.imageUrl} alt={memory.title} />
+                  </div>
+                )}
                 
-                <button 
-                  className="delete-button"
-                  onClick={() => handleDeleteMemory(memory.id)}
-                >
-                  <i className="fas fa-trash"></i>
-                </button>
+                <div className="memory-content">
+                  <h4>{memory.title}</h4>
+                  <div className="memory-date">{formatDate(memory.date)}</div>
+                  <p>{memory.description}</p>
+                  
+                  <button 
+                    className="delete-button"
+                    onClick={() => handleDeleteMemory(memory.id)}
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 };
